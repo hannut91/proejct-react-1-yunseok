@@ -1,10 +1,8 @@
-import React, { useEffect, useState } from 'react';
-
-import { useSelector, useDispatch } from 'react-redux';
+import React from 'react';
 
 import { CircularProgressbar } from 'react-circular-progressbar';
 
-import { startPomo, stopPomo } from '../../store/slice';
+import dayjs from 'dayjs';
 
 const styles = {
   counter: {
@@ -34,18 +32,7 @@ const styles = {
   }
 }
 
-export default function Timer() {
-  const dispatch = useDispatch();
-  const { currentSeconds } = useSelector((state) => state);
-
-  useEffect(() => {
-    dispatch(startPomo());
-
-    return () => {
-      dispatch(stopPomo(window.clearInterval));
-    }
-  }, []);
-
+export default function Timer({ currentSeconds }) {
   return (
     <>
       <CircularProgressbar
@@ -53,7 +40,7 @@ export default function Timer() {
         MaxValue={25 * 60 * 1000}
         css={styles.progress}
         value={currentSeconds / (25 * 60 * 1000) * 100}
-        text="25:00"
+        text={dayjs(currentSeconds).format('mm:ss')}
       />
     </>
   )

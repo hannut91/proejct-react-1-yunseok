@@ -2,7 +2,7 @@ import React from 'react';
 
 import Head from 'next/head';
 
-import Timer from '../components/presentational/Timer';
+import TimerContainer from '../components/containers/TimerContainer';
 
 export default function Home() {
   return (
@@ -11,7 +11,7 @@ export default function Home() {
         <title>Create Next App</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Timer />
+      <TimerContainer />
     </>
   );
 }
