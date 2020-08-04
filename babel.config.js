@@ -10,5 +10,6 @@ module.exports = {
     ],
     '@babel/preset-react',
     'next/babel',
+    '@emotion/babel-preset-css-prop',
   ],
 };
