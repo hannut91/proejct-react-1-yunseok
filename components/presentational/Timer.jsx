@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from 'react';
 
+import { useSelector, useDispatch } from 'react-redux';
+
 import { CircularProgressbar } from 'react-circular-progressbar';
+
+import { startPomo, stopPomo } from '../../store/slice';
 
 const styles = {
   counter: {
@@ -31,13 +35,24 @@ const styles = {
 }
 
 export default function Timer() {
+  const dispatch = useDispatch();
+  const { currentSeconds } = useSelector((state) => state);
+
+  useEffect(() => {
+    dispatch(startPomo());
+
+    return () => {
+      dispatch(stopPomo(window.clearInterval));
+    }
+  }, []);
+
   return (
     <>
       <CircularProgressbar
         minValue={0}
         MaxValue={25 * 60 * 1000}
         css={styles.progress}
-        value={current / (25 * 60 * 1000) * 100}
+        value={currentSeconds / (25 * 60 * 1000) * 100}
         text="25:00"
       />
     </>
